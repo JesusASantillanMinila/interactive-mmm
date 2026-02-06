@@ -53,6 +53,7 @@ if st.button("Generate Dataset"):
 # ... (inside the Analysis section of app.py)
 if 'mmm_df' in st.session_state:
     st.header("🔮 Bayesian MMM Analysis")
+    df = st.session_state['mmm_df']
     
     with st.spinner("Running MCMC Sampling (this takes a few seconds)..."):
         roi_df, trace, preds = run_bayesian_mmm(df, channels)
