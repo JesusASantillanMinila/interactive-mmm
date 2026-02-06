@@ -31,6 +31,7 @@ if st.button("Generate Dataset"):
         st.error("Spend shares must add up to 100%!")
     else:
         df = generate_mmm_data(channels, yoy_trend, peak_month, total_spend, spend_shares)
+        st.session_state['mmm_df'] = df
         
         # Plotting
         col1, col2 = st.columns(2)
