@@ -33,19 +33,16 @@ if st.button("Generate Dataset"):
     else:
         df = generate_mmm_data(channels, yoy_trend, peak_month, total_spend, spend_shares)
         st.session_state['mmm_df'] = df
+                
         
-        # Plotting
-        col1 = st.columns(1)
-        
-        with col1:
-            st.subheader("Ad Spend Over Time")
-            spend_cols = [f'spend_{c}' for c in channels]
-            fig_spend = px.line(df, x='date', y=spend_cols, title="Weekly Spend per Channel")
-            st.plotly_chart(fig_spend, use_container_width=True)
+        st.subheader("Ad Spend Over Time")
+        spend_cols = [f'spend_{c}' for c in channels]
+        fig_spend = px.line(df, x='date', y=spend_cols, title="Weekly Spend per Channel")
+        st.plotly_chart(fig_spend, use_container_width=True)
 
-            st.subheader("Total Demand (Sales)")
-            fig_demand = px.area(df, x='date', y='demand', title="Total Demand (Trend + Seasonality + Marketing)")
-            st.plotly_chart(fig_demand, use_container_width=True)
+        st.subheader("Total Demand (Sales)")
+        fig_demand = px.area(df, x='date', y='demand', title="Total Demand (Trend + Seasonality + Marketing)")
+        st.plotly_chart(fig_demand, use_container_width=True)
             
         st.success("Data generated successfully!")
         st.dataframe(df.head(10))
