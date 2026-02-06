@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from data_generation import generate_mmm_data
-from mmm_analysis import run_mmm_regression
+from mmm_analysis import run_bayesian_mmm
 
 st.set_page_config(page_title="MMM Data Simulator", layout="wide")
 st.title("📈 MMM Synthetic Data Generator")
