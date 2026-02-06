@@ -35,15 +35,14 @@ if st.button("Generate Dataset"):
         st.session_state['mmm_df'] = df
         
         # Plotting
-        col1, col2 = st.columns(2)
+        col1 = st.columns(1)
         
         with col1:
             st.subheader("Ad Spend Over Time")
             spend_cols = [f'spend_{c}' for c in channels]
             fig_spend = px.line(df, x='date', y=spend_cols, title="Weekly Spend per Channel")
             st.plotly_chart(fig_spend, use_container_width=True)
-            
-        with col2:
+
             st.subheader("Total Demand (Sales)")
             fig_demand = px.area(df, x='date', y='demand', title="Total Demand (Trend + Seasonality + Marketing)")
             st.plotly_chart(fig_demand, use_container_width=True)
