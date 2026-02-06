@@ -3,9 +3,4 @@ numpy
 pandas
 matplotlib
 pymc-marketing
-plotly
-pymc
-arviz
-data_generation
-mmm_analysis
-sklearn
+
