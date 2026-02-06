@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import arviz as az
 from data_generation import generate_mmm_data
 from mmm_analysis import run_bayesian_mmm
 
