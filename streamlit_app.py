@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 from data_generation import generate_mmm_data
+from mmm_analysis import run_mmm_regression
 
 st.set_page_config(page_title="MMM Data Simulator", layout="wide")
 st.title("📈 MMM Synthetic Data Generator")
@@ -46,3 +48,24 @@ if st.button("Generate Dataset"):
             
         st.success("Data generated successfully!")
         st.dataframe(df.head(10))
+
+# --- ANALYSIS SECTION ---
+# ... (inside the Analysis section of app.py)
+if 'mmm_df' in st.session_state:
+    st.header("🔮 Bayesian MMM Analysis")
+    
+    with st.spinner("Running MCMC Sampling (this takes a few seconds)..."):
+        roi_df, trace, preds = run_bayesian_mmm(df, channels)
+    
+    col_a, col_b = st.columns(2)
+    
+    with col_a:
+        st.subheader("ROI Credible Intervals")
+        # Show the uncertainty
+        fig_uncertainty = az.plot_forest(trace, var_names=["beta"], combined=True)
+        st.pyplot(fig_uncertainty[0].figure)
+        st.caption("This chart shows the model's confidence. Narrower bars = more certainty.")
+
+    with col_b:
+        fig_roi = px.bar(roi_df, x="Channel", y="ROI", title="Mean Predicted ROI")
+        st.plotly_chart(fig_roi)
