@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 def generate_mmm_data(channels, adspend_level, decay_speed, delay_val, sat_speed, peak_month):
     np.random.seed(42)
